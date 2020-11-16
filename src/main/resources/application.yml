@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: springboot-validation-demo
+server:
+  port: 9091
