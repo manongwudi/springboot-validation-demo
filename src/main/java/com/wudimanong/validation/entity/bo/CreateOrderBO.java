@@ -13,5 +13,4 @@ public class CreateOrderBO implements Serializable {
 
     private String orderId;
     private String status;
-
 }

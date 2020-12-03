@@ -4,6 +4,7 @@ import com.wudimanong.validation.entity.bo.CreateOrderBO;
 import com.wudimanong.validation.entity.dto.CreateOrderDTO;
 import com.wudimanong.validation.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +24,7 @@ public class OrderController {
      * @return
      */
     @PostMapping("/createOrder")
-    public CreateOrderBO validationTest(CreateOrderDTO createOrderDTO) {
+    public CreateOrderBO validationTest(@Validated CreateOrderDTO createOrderDTO) {
         return orderServiceImpl.createOrder(createOrderDTO);
     }
 }
