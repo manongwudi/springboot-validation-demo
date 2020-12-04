@@ -5,15 +5,18 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * @author qiaojiang
+ */
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Setter
-@Getter
 @JsonPropertyOrder({"code", "message", "data"})
 public class ResponseResult<T> implements Serializable {
 
@@ -34,8 +37,6 @@ public class ResponseResult<T> implements Serializable {
     private String message;
 
     /**
-     * 用于只返回处理状态的数据（状态码：000000）
-     *
      * @return 响应结果
      */
     public static ResponseResult<String> OK() {
@@ -43,8 +44,6 @@ public class ResponseResult<T> implements Serializable {
     }
 
     /**
-     * 正常返回数据（状态码：000000）
-     *
      * @param data 返回的数据
      * @param <T>  返回的数据类型
      * @return 响应结果
@@ -87,52 +86,6 @@ public class ResponseResult<T> implements Serializable {
     }
 
     /**
-     * 校验入参有误，不满足接口入参要求
-     *
-     * @param globalCodeEnum 入参有误的返回码枚举类型
-     * @param <T>            返回的数据类型
-     * @return 响应结果
-     */
-    public static <T> ResponseResult<T> paramsError(GlobalCodeEnum globalCodeEnum) {
-        return packageObject(null, globalCodeEnum);
-    }
-
-    /**
-     * 返回其它信息：若调用第三方接口返回失败
-     *
-     * @param globalCodeEnum 入参有误的返回码枚举类型
-     * @param message        返回的消息
-     * @param <T>            返回的数据类型
-     * @return 响应结果
-     */
-    public static <T> ResponseResult<T> otherInfo(GlobalCodeEnum globalCodeEnum, String message) {
-        return packageObject(null, globalCodeEnum.getCode(), message);
-    }
-
-    /**
-     * 返回其它信息：若调用第三方接口返回失败
-     *
-     * @param globalCodeEnum 入参有误的返回码枚举类型
-     * @param <T>            返回的数据类型
-     * @return 响应结果
-     */
-    public static <T> ResponseResult<T> otherInfo(GlobalCodeEnum globalCodeEnum) {
-        return packageObject(null, globalCodeEnum.getCode(), null);
-    }
-
-    /**
-     * 校验入参有误，不满足接口入参要求
-     *
-     * @param globalCodeEnum 入参有误的返回码枚举类型
-     * @param message        返回的消息
-     * @param <T>            返回的数据类型
-     * @return 响应结果
-     */
-    public static <T> ResponseResult<T> paramsError(GlobalCodeEnum globalCodeEnum, String message) {
-        return packageObject(null, globalCodeEnum.getCode(), message);
-    }
-
-    /**
      * 系统服务不可用
      *
      * @param globalCodeEnum Feign依赖服务不可用的返回码枚举类型
@@ -141,18 +94,6 @@ public class ResponseResult<T> implements Serializable {
      */
     public static <T> ResponseResult<T> systemError(GlobalCodeEnum globalCodeEnum) {
         return packageObject(null, globalCodeEnum);
-    }
-
-    /**
-     * 系统服务不可用
-     *
-     * @param globalCodeEnum Feign依赖服务不可用的返回码枚举类型
-     * @param message        返回消息
-     * @param <T>            返回的数据类型
-     * @return 响应结果
-     */
-    public static <T> ResponseResult<T> exceptionInfo(GlobalCodeEnum globalCodeEnum, String message) {
-        return packageObject(null, globalCodeEnum.getCode(), message);
     }
 
     /**

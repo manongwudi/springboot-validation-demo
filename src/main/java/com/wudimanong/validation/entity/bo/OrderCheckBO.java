@@ -16,8 +16,8 @@ public class OrderCheckBO {
     private String orderId;
     @Min(value = 1, message = "订单金额不能小于0")
     private Integer orderAmount;
-    @NotNull(message = "创建人不能为空")
+    //@NotNull(message = "创建人不能为空")
     private String operator;
-    @NotNull(message = "操作时间不能为空")
+    //@NotNull(message = "操作时间不能为空")
     private String operatorTime;
 }
